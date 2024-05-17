@@ -153,7 +153,7 @@ def calculer_bits_moyens(dictionnaire_codes):
     for valeur in valeurs:
         res += len(valeur)
     res /= len(valeurs)
-    res = round(res, 3)
+    res = round(res, 4)
     return res
 
 def taille_alphabet(dictionnaire_frequences):
