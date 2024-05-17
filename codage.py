@@ -98,7 +98,7 @@ def construire_arbre_huffman(dictionnaire_frequences):
     arbre_huffman = noeuds[0]
     return arbre_huffman
 
-def generer_codes_huffman(noeud, valeur, dictionnaire_codes):
+def generer_codes_huffman(arbre_huffman, valeur, dictionnaire_codes):
     """
     Génère les codes de Huffman pour chaque caractère en parcourant l'arbre.
 
@@ -110,13 +110,13 @@ def generer_codes_huffman(noeud, valeur, dictionnaire_codes):
     Returns:
     - dict: Un dictionnaire contenant les caractères et leurs codes de Huffman respectifs.
     """
-    nouvelleValeur = valeur + noeud.bord
-    if noeud.gauche is not None:
-        generer_codes_huffman(noeud.gauche, nouvelleValeur, dictionnaire_codes)
-    if noeud.droite is not None:
-        generer_codes_huffman(noeud.droite, nouvelleValeur, dictionnaire_codes)
-    if noeud.gauche is None and noeud.droite is None:
-        dictionnaire_codes[noeud.etiquette] = nouvelleValeur
+    nouvelleValeur = valeur + arbre_huffman.bord
+    if arbre_huffman.gauche is not None:
+        generer_codes_huffman(arbre_huffman.gauche, nouvelleValeur, dictionnaire_codes)
+    if arbre_huffman.droite is not None:
+        generer_codes_huffman(arbre_huffman.droite, nouvelleValeur, dictionnaire_codes)
+    if arbre_huffman.gauche is None and arbre_huffman.droite is None:
+        dictionnaire_codes[arbre_huffman.etiquette] = nouvelleValeur
     return dictionnaire_codes
 
 def calculer_taux_compression(nom_fichier):
@@ -153,7 +153,7 @@ def calculer_bits_moyens(dictionnaire_codes):
     for valeur in valeurs:
         res += len(valeur)
     res /= len(valeurs)
-    res = round(res, 3)
+    res = round(res, 4)
     return res
 
 def taille_alphabet(dictionnaire_frequences):
